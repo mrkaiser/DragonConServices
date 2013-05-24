@@ -1,0 +1,96 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://dcontwenty.appspot.com/_ah/api",
+  "name" : "models",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://dcontwenty.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "models.tracks" : {
+      "path" : "tracks/get",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.devgupta.dcon.resources.ModelResource.getTracks",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "models.searchsuggest" : {
+      "path" : "searchsuggest/get",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.devgupta.dcon.resources.ModelResource.getSuggestions",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Tracks" : {
+        "id" : "Tracks",
+        "type" : "object",
+        "properties" : {
+          "track" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Track"
+            }
+          }
+        }
+      },
+      "Track" : {
+        "id" : "Track",
+        "type" : "object",
+        "properties" : {
+        }
+      },
+      "SearchSuggestions" : {
+        "id" : "SearchSuggestions",
+        "type" : "object",
+        "properties" : {
+        }
+      }
+    },
+    "methods" : {
+      "org.devgupta.dcon.resources.ModelResource.getTracks" : {
+        "response" : {
+          "$ref" : "Tracks"
+        }
+      },
+      "org.devgupta.dcon.resources.ModelResource.getSuggestions" : {
+        "response" : {
+          "$ref" : "SearchSuggestions"
+        }
+      }
+    }
+  }
+}

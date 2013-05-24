@@ -1,0 +1,2 @@
+serviceClass: org.devgupta.dcon.client.GreetingService
+path: DD4E4D5BE3EF36A3F4AF0530A15BEC51.gwt.rpc
