@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.logging.Logger;
 
 import org.devgupta.dcon.dao.wrappers.DAOWrapper;
 
 import com.google.appengine.api.rdbms.AppEngineDriver;
+
 
 /**
  * DAOs can follow the Template Method Design Pattern
@@ -18,7 +19,7 @@ import com.google.appengine.api.rdbms.AppEngineDriver;
  * 
  */
 public abstract class CloudSQLDAO<T> {
-	
+	private static final Logger log = Logger.getLogger(CloudSQLDAO.class.getName());
 	protected final String statement;
 	protected final DAOWrapper<T> wrapper;
 	
@@ -35,8 +36,11 @@ public abstract class CloudSQLDAO<T> {
 		Connection c = null;
 		T returnable = null;
 		try {
+			log.info("Entering query execution");
 			c = buildDriverAndRetrieveConnection();
+			log.info(c.toString());
 			PreparedStatement statement = generatePreparedStatementUsingConnection(c);
+			log.info("Statement to execute"+ statement.toString());
 			returnableResults = executePreparedStatementForQuery(statement);
 			returnable = wrapper.wrapResultSet(returnableResults);
 		} catch (Exception e) {
@@ -46,6 +50,7 @@ public abstract class CloudSQLDAO<T> {
 				try {
 					c.close();
 				} catch (SQLException ignore) {
+					ignore.printStackTrace();
 				}
 			}
 		}

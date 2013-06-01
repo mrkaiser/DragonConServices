@@ -24,6 +24,20 @@
     "maxAge" : 0
   },
   "methods" : {
+    "models.test" : {
+      "path" : "test/get",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.devgupta.dcon.resources.ModelResource.getTest",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "models.tracks" : {
       "path" : "tracks/get",
       "httpMethod" : "GET",
@@ -55,6 +69,12 @@
   },
   "descriptor" : {
     "schemas" : {
+      "SearchSuggestions" : {
+        "id" : "SearchSuggestions",
+        "type" : "object",
+        "properties" : {
+        }
+      },
       "Tracks" : {
         "id" : "Tracks",
         "type" : "object",
@@ -72,15 +92,14 @@
         "type" : "object",
         "properties" : {
         }
-      },
-      "SearchSuggestions" : {
-        "id" : "SearchSuggestions",
-        "type" : "object",
-        "properties" : {
-        }
       }
     },
     "methods" : {
+      "org.devgupta.dcon.resources.ModelResource.getTest" : {
+        "response" : {
+          "$ref" : "SearchSuggestions"
+        }
+      },
       "org.devgupta.dcon.resources.ModelResource.getTracks" : {
         "response" : {
           "$ref" : "Tracks"
