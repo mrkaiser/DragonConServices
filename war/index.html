@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" ng-app> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="myApp"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -45,8 +45,8 @@
 
         <div class="container">
 
-            
-            <form id="tracks" ng-controller="TracksCtrl">
+            <div class="span5">
+                <form id="tracks" ng-controller="TracksCtrl" >
                 <fieldset>
                     <legend>Tracks</legend>
                     <select>
@@ -54,13 +54,47 @@
                     </select>
                 </fieldset>
             </form>
-            <form id="vendors">
-                <input type="text" id="website-vendor">
-                <select ng-controller="TracksCtrl">
-                    <option ng-repeat="track in tracks.track">{{track.name}}</option>
-                </select>
-                <input type="text" id="website-vendor">
+            <form id="vendors" ng-controller="VendorCtrl">
+                <fieldset>
+                    <legend>Vendor Input</legend>
+                    <label>Company Name</label>
+                    <input ng-model="data.vendor.company_name" type="text" placeholder="Name" id="name-vendor" required>
+                    <label>Website</label>
+                    <input ng-model="data.vendor.website" type="text" placeholder="website" id="website-vendor" required>
+                    <div >
+                        <select ng-model="data.vendor.product_pod" required>
+                            <option  ng-repeat="track in tracks.track">{{track.name}}</option>
+                            {{ng}}
+                        </select>
+                    </div>
+
+                    
+                    <label>Description</label>
+                    <input type="text" ng-model="data.vendor.product_description" placeholder="description" id="description-vendor" required>
+                    <label></label>
+                    <button type="submit" ng:click="save()" class="btn" >Submit Vendor</button>
+                </fieldset>
             </form>
+            <form id="speakers" ng-controller="SpeakerCtrl">
+                <fieldset>
+                    <legend>Speaker</legend>
+                    <h3>The User ID and Speaker ID will be set on the backend. Do Not worry about it<h3>
+                    <label>First Name</label>
+                    <input ng-model="speaker.first_name" type="text" placeholder="First Name"  required>
+                    <label>Last Name</label>
+                    <input ng-model="speaker.last_name" type="text" placeholder="Last Name" required>
+                    <label>Plus</label>
+                    <input ng-model="speaker.plusone_url" type="text" placeholder="Plus" >
+                    <label>Thumbnail Url</label>
+                    <input ng-model="speaker.thumbnail_url" type="text" placeholder="Thumbnail" >
+                    <label>Bio</label>
+                    <input ng-model="speaker.bio" type="text" placeholder="Bio" >
+                    <label></label>
+                    <button type="submit" ng:click="save()" class="btn" >Submit Speaker</button>
+                </fieldset>
+            </form>
+            </div>
+            
             <!-- Example row of columns -->
             <div class="row">
                
@@ -79,7 +113,7 @@
 
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/angular.min.js"></script>
-        <script src="js/vendor/ui-bootstrap-tpls-0.3.0.min.js"></script>
+        
         <script src="js/main.js"></script>
 
     </body>
